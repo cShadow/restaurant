@@ -1,4 +1,4 @@
-package fr.ul.miage.m1.restaurant.main;
+package fr.ul.miage.m1.restaurant.database;
 
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
@@ -27,43 +27,37 @@ import static java.util.Arrays.asList;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class Main {
-
-	public static void main(String[] args) throws Exception {
-		System.out.println("START");
-		
-		
-		Restaurant.createBackend();
-		
-		
-		
-		
-		/*CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
-                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-		
-		
-		MongoClient mongoClient = new MongoClient("192.168.0.196", MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
-		
-		MongoDatabase database = mongoClient.getDatabase("restaurant");
-		
-		//database = database.withCodecRegistry(pojoCodecRegistry);
-		
-		//Table t = new Table(1);
-
+public class MongoDB {
 	
-		
-		MongoCollection<Table> collection = database.getCollection("table", Table.class);
-		//MongoCollection<Personne> collection2 = database.getCollection("personne", Personne.class);
-		
-		//collection.insertOne(t);
-		
-		Table t = collection.find(eq("_id", 1)).first();
-		
-		System.out.println(t.getId());
-		System.out.println(t.getEtat());*/
-		
+	private static String IP_SERVEUR_MONGODB = "192.168.0.196";
+	private static String NOM_BASE_DE_DONNEES = "restaurant";
 	
+	
+	private MongoCollection<Table> collectionTable;
+	private MongoCollection<Personne> collectionPersonne;
+	
+	public MongoDB() {
+		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(), fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 		
+		
+
+		MongoClient mongoClient = new MongoClient(IP_SERVEUR_MONGODB, MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
+		
+		MongoDatabase database = mongoClient.getDatabase(NOM_BASE_DE_DONNEES);
+
+		// Collections :
+		this.collectionTable = database.getCollection("table", Table.class);
+		this.collectionPersonne = database.getCollection("personne", Personne.class);
+	}
+	
+	
+
+	public MongoCollection<Table> getCollectionTable() {
+		return collectionTable;
+	}
+
+	public MongoCollection<Personne> getCollectionPersonne() {
+		return collectionPersonne;
 	}
 
 }

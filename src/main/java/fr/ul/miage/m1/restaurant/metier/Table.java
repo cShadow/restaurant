@@ -8,9 +8,28 @@ public class Table {
 	private EtatTable etat;
 	private Personne serveur;
 	
+	public Table() {
+		
+	}
 	
+	public Table(int id) {
+		this.id = id;
+		this.etat = EtatTable.LIBRE;
+	}
 	
+	public Table(int id, EtatTable etat) {
+		super();
+		this.id = id;
+		this.etat = etat;
+	}
 	
+	public Table(int id, EtatTable etat, Personne serveur) {
+		super();
+		this.id = id;
+		this.etat = etat;
+		this.serveur = serveur;
+	}
+
 	public EtatTable getEtat() {
 		return etat;
 	}

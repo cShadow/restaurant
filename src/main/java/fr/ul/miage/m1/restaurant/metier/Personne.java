@@ -9,7 +9,12 @@ public class Personne {
 	private Role role;
 	
 	
-	
+
+	public Personne() {
+		super();
+	}
+
+
 	public Personne(int id, String nom, String prenom, Role role) {
 		super();
 		this.id = id;
