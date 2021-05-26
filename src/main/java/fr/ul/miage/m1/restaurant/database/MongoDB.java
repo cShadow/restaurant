@@ -30,7 +30,8 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoDB {
 	
-	private static String IP_SERVEUR_MONGODB = "localhost";
+	//private static String IP_SERVEUR_MONGODB = "localhost";
+	private static String IP_SERVEUR_MONGODB = "192.168.0.196";
 	private static String NOM_BASE_DE_DONNEES = "restaurant";
 	
 	

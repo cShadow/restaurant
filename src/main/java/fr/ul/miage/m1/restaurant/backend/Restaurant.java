@@ -1,6 +1,8 @@
 package fr.ul.miage.m1.restaurant.backend;
 
+
 import fr.ul.miage.m1.restaurant.backend.gestion.FakeDataGestion;
+import fr.ul.miage.m1.restaurant.backend.gestion.LoginGestion;
 import fr.ul.miage.m1.restaurant.database.MongoDB;
 
 public class Restaurant {
@@ -22,5 +24,10 @@ public class Restaurant {
 			backend = new Restaurant();
 		}
 	}
+	
+	public static LoginGestion getLoginGestion() {
+		return new LoginGestion(mongoDB);
+	}
+	
 
 }

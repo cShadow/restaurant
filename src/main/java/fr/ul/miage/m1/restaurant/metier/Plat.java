@@ -15,6 +15,10 @@ public class Plat {
 		this.prix = prix;
 	}
 	
+	public Plat() {
+		super();
+	}
+	
 	//Getter Setter
 	public int getId() {
 		return id;
