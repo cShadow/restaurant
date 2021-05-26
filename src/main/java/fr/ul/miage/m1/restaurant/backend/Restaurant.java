@@ -11,6 +11,9 @@ public class Restaurant {
 	private static Restaurant backend;
 
 	private static MongoDB mongoDB;
+	
+	private static LoginGestion loginGestion;
+	
 
 	public Restaurant() throws Exception {
 		mongoDB = new MongoDB();
@@ -26,7 +29,10 @@ public class Restaurant {
 	}
 	
 	public static LoginGestion getLoginGestion() {
-		return new LoginGestion(mongoDB);
+		if (Restaurant.loginGestion == null) {
+			Restaurant.loginGestion =  new LoginGestion(mongoDB);
+		}
+		return Restaurant.loginGestion;
 	}
 	
 

@@ -10,15 +10,26 @@ import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 
 import fr.ul.miage.m1.restaurant.backend.Restaurant;
+import fr.ul.miage.m1.restaurant.frontend.MainController;
 import fr.ul.miage.m1.restaurant.metier.Personne;
 import fr.ul.miage.m1.restaurant.metier.Table;
 import fr.ul.miage.m1.restaurant.metier.enums.EtatTable;
 import fr.ul.miage.m1.restaurant.metier.enums.Role;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;
@@ -27,13 +38,40 @@ import static java.util.Arrays.asList;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class Main {
+public class Main extends Application {
+	
+	
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Restaurant.createBackend();
+		
+		Parent root = null;
+		try {
+			URL url = new File("src/main/resources/fxml/ihm.fxml").toURI().toURL();
+			FXMLLoader loader = new FXMLLoader(url);
+			root = (Parent)loader.load();
+			MainController controller = (MainController)loader.getController();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Scene principale
+		Scene scene = new Scene(root);
+		primaryStage.setResizable(false);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Projet GL");
+		primaryStage.show();
+		
+	}
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("START");
 		
 		
-		Restaurant.createBackend();
+		launch(args);
+		
+		
 		
 		
 		
