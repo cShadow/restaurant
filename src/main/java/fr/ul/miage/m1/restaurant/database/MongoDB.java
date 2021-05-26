@@ -11,6 +11,7 @@ import com.mongodb.client.result.UpdateResult;
 
 import fr.ul.miage.m1.restaurant.backend.Restaurant;
 import fr.ul.miage.m1.restaurant.metier.Personne;
+import fr.ul.miage.m1.restaurant.metier.Plat;
 import fr.ul.miage.m1.restaurant.metier.Table;
 import fr.ul.miage.m1.restaurant.metier.enums.EtatTable;
 import fr.ul.miage.m1.restaurant.metier.enums.Role;
@@ -29,12 +30,13 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoDB {
 	
-	private static String IP_SERVEUR_MONGODB = "192.168.0.196";
+	private static String IP_SERVEUR_MONGODB = "localhost";
 	private static String NOM_BASE_DE_DONNEES = "restaurant";
 	
 	
 	private MongoCollection<Table> collectionTable;
 	private MongoCollection<Personne> collectionPersonne;
+	private MongoCollection<Plat> collectionPlat;
 	
 	public MongoDB() {
 		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(), fromProviders(PojoCodecProvider.builder().automatic(true).build()));
@@ -48,6 +50,7 @@ public class MongoDB {
 		// Collections :
 		this.collectionTable = database.getCollection("table", Table.class);
 		this.collectionPersonne = database.getCollection("personne", Personne.class);
+		this.collectionPlat = database.getCollection("plat", Plat.class);
 	}
 	
 	
@@ -60,4 +63,7 @@ public class MongoDB {
 		return collectionPersonne;
 	}
 
+	public MongoCollection<Plat> getCollectionPlat() {
+		return collectionPlat;
+	}
 }
